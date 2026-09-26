@@ -22,6 +22,8 @@ def push(scope, cid, payload, version=1):
 
 if __name__ == "__main__":
     assert call("/")[1]["endpoints"]["healthz"] == "GET /v1/healthz"
+    for path in ("/v1/context", "/v1/tick", "/v1/reply"):
+        assert call(path)[1]["method"] == "POST"
     assert call("/v1/healthz")[0] == 200
     assert call("/v1/metadata")[1]["model"] == "deterministic-local-rules"
     assert call("/v1/teardown", {})[0] == 200

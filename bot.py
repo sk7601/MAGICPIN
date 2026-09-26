@@ -182,6 +182,33 @@ def index():
     }
 
 
+@app.get("/v1/context")
+def context_usage():
+    return {
+        "method": "POST",
+        "description": "Store a versioned category, merchant, customer, or trigger context.",
+        "example": {"scope": "category", "context_id": "dentists", "version": 1, "payload": {"slug": "dentists"}, "delivered_at": "2026-04-26T10:00:00Z"},
+    }
+
+
+@app.get("/v1/tick")
+def tick_usage():
+    return {
+        "method": "POST",
+        "description": "Generate actions for available triggers.",
+        "example": {"now": "2026-04-26T10:30:00Z", "available_triggers": ["trg_example"]},
+    }
+
+
+@app.get("/v1/reply")
+def reply_usage():
+    return {
+        "method": "POST",
+        "description": "Continue a conversation after a merchant or customer reply.",
+        "example": {"conversation_id": "conv_example", "merchant_id": "m_example", "customer_id": None, "from_role": "merchant", "message": "Yes, please send it", "received_at": "2026-04-26T10:45:00Z", "turn_number": 2},
+    }
+
+
 @app.get("/v1/healthz")
 def healthz():
     with LOCK:

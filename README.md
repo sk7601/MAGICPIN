@@ -11,6 +11,8 @@ python -m uvicorn bot:app --host 0.0.0.0 --port 8080
 
 Send versioned category, merchant, customer, and trigger payloads to `POST /v1/context`. Call `POST /v1/tick` with an ISO timestamp and active trigger IDs. Continue an action with `POST /v1/reply`. `GET /v1/healthz` and `GET /v1/metadata` provide operational information.
 
+Opening a URL in a browser sends `GET`. The three POST paths return usage examples when opened in a browser; send JSON with `POST` to invoke them.
+
 ## Deploy
 
 Connect this repository to Render as a Python web service. `render.yaml` provides the build, start, and health settings. Render assigns the public HTTPS base URL. Keep the service running with one worker throughout a judge run because state is in memory.
