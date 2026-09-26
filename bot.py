@@ -167,6 +167,21 @@ def compose(category: dict, merchant: dict, trigger: dict, customer: dict | None
     return {"body": body, "cta": cta, "send_as": "vera", "suppression_key": trigger.get("suppression_key") or trigger.get("id", ""), "rationale": rationale}
 
 
+@app.get("/")
+def index():
+    return {
+        "name": "Vera merchant assistant API",
+        "status": "ok",
+        "endpoints": {
+            "context": "POST /v1/context",
+            "tick": "POST /v1/tick",
+            "reply": "POST /v1/reply",
+            "healthz": "GET /v1/healthz",
+            "metadata": "GET /v1/metadata",
+        },
+    }
+
+
 @app.get("/v1/healthz")
 def healthz():
     with LOCK:
